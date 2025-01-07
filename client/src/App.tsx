@@ -17,7 +17,7 @@ function App() {
 		function onDisconnect(){
 			setIsConnected(false);
 		}
-		function onLogsUpdate(data: string){
+		function onLogUpdate(data: string){
 			if(logsDivRef && logsDivRef.current){
 				logsDivRef.current.textContent = data;
 			}
@@ -25,12 +25,12 @@ function App() {
 
 		socket.on('connect', onConnect);
 		socket.on('disconnect', onDisconnect);
-		socket.on('logs_update', (data) => onLogsUpdate(data));
+		socket.on('log_update', (data) => onLogUpdate(data));
 
 		return () => {
 			socket.off('connect', onConnect);
 			socket.off('disconnect', onDisconnect);
-			socket.on('logs_update', onLogsUpdate);
+			socket.on('logs_update', onLogUpdate);
 		}
 	})
 
